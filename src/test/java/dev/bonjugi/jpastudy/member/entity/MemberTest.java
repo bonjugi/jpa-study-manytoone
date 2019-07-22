@@ -52,4 +52,23 @@ public class MemberTest {
 		// then
 		assertThat(find.getAddress()).isEqualTo(address);
 	}
+
+
+	@Test
+	public void 멤버는_팀을_가질수있다(){
+
+		// given
+		Member bonjugi = new Member("bonjugi");
+		em.persist(bonjugi);
+
+		// when
+		Team team = new Team("team");
+		em.persist(team);
+		bonjugi.setTeam(team);
+
+
+		// then
+		Member find = em.find(Member.class, bonjugi.getId());
+		assertThat(find.getTeam()).isEqualTo(team);
+	}
 }

@@ -2,9 +2,8 @@ package dev.bonjugi.jpastudy.member.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 
 @Entity
 @Getter
@@ -18,13 +17,21 @@ public class Member {
     private Long id;
 
     private String name;
-	private Address address;
+    private Address address;
 
-	public void changeAddress(Address address){
-		this.address = address;
-	}
+    @ManyToOne
+    private Team team;
 
-    public Member(final String name) {
-        this.name = name;
+    public void changeAddress(Address address){
+       this.address = address;
+    }
+
+    public Member(String name) {
+       this.name = name;
+    }
+
+    // 연관관계 편의 메소드
+    public void setTeam(Team team) {
+       this.team = team;
     }
 }
